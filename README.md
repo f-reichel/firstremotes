@@ -50,8 +50,13 @@
 
 ## Create cluster sharding for stateful actors
 
-- **Exercise**: Create stateful actors (cf. `SimpleStateKeeper) and spread instances over various nodes using *Sharding*. 
+- **Exercise**: Create stateful actors (cf. `SimpleStateKeeper`) and spread instances over various nodes using *Sharding*. 
   - implement functions `ExtractShardId` and `ExtractEntityId` (e.g. in `object SimpleStateKeeper`)
   - As you create new and remove existing nodes the actor instances should be moved in the shards across the nodes
-  - See documentation for a simple example: https://doc.akka.io/docs/akka/current/cluster-sharding.html?language=scala 
-  
+  - **N.B.:** Without `PersistentActor` state will not be moved!
+- **Solution**
+  - Start various terminal instances and start a node instance with `sbt run`
+  - Use one terminal node and start with `sbt console` and use `:paste`-mode in order to start an actor system, an sharding domain proxy, and start sending messages
+    (in order to do so import and intatiate all (implicit) values as withing the object `ShardNode`) 
+  - While testing, start and remove nodes all actors should be accessible 
+
